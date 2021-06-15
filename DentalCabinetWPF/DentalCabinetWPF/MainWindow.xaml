@@ -1,0 +1,38 @@
+﻿<Window x:Class="DentalCabinetWPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DentalCabinetWPF"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="800" Width="1400">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="150" MinWidth="150"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="1200" MinWidth="250"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+        <StackPanel>
+            <Button Width="100" Content="Doctors" Click="DoctorsButton_Click" Margin="10 5"/>
+            <Button Width="100" Content="Patients" Click="PatientsButton_Click" Margin="10 5"/>
+            <Button Width="100" Content="Positions" Click="PositionsButton_Click" Margin="10 5"/>
+            <Button Width="100" Content="Services" Click="ServicesButton_Click" Margin="10 5"/>
+            <Button Width="100" Content="Talons" Click="TalonsButton_Click" Margin="10 5"/>
+            <Button Width="100" Content="Time Table" Click="TimeTableButton_Click" Margin="10 5"/>
+            <Button Width="100" Content="Orders" Margin="10 5"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Center">
+            <Button Width="50" Content="Previous" Height="20" Margin="10 0 10 0" Click="PreviousPageButton_Click" x:Name="PreviousPageButton"/>
+            <Button Width="50" Content="Next" Height="20" Margin="10 0 10 0" Click="NextPageButton_Click" x:Name="NextPageButton"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Right">
+            <Button Width="50" Content="Close" Height="20" Margin="10 0 10 0" Click="ClosePageButton_Click" x:Name="ClosePageButton"/>
+        </StackPanel>
+        <GridSplitter Grid.Column="1" Grid.RowSpan="2" Width="3" HorizontalAlignment="Center" Background="Black" />
+        <Frame x:Name="PageFrame" LoadCompleted="PageFrame_LoadCompleted" Grid.Column="2" NavigationUIVisibility="Hidden"/>
+    </Grid>
+</Window>

@@ -1,0 +1,87 @@
+﻿<Page x:Class="DentalCabinetWPF.Pages.TimeTablePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:DentalCabinetWPF.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="1200"
+      Title="TimeTablePage">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" MinWidth="600"/> <!--Doctors Data Grid 0-->
+            <ColumnDefinition Width="Auto"/> <!--Doctors - Timetable Grid Splitter 1-->
+            <ColumnDefinition Width="*" MinWidth="300"/> <!--Timetable Data Grid 2-->
+            <ColumnDefinition Width="Auto"/> <!--Dlg Grid Splitter 3-->
+            <ColumnDefinition Width="250" MinWidth="250"/> <!--Dlg 4-->
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Rectangle Fill="LightBlue" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5"/>
+        <Label Content="Doctors" Grid.ColumnSpan="2" FontSize="16" Grid.Column="0"/>
+        <Label Content="Time Table" Grid.ColumnSpan="2" FontSize="16" Grid.Column="2"/>
+        <StackPanel x:Name="DataStackPanel" Grid.Row="1" Grid.RowSpan="2" Grid.Column="0" Grid.ColumnSpan="1">
+            <StackPanel Orientation="Horizontal">
+                <Button x:Name="AddDoctorButton" Content="Add" Width="75" Margin="5,5" Click="AddDoctorButton_Click" />
+                <Button x:Name="EditDoctorButton" Content="Edit" Width="75" Margin="5,5" Click="EditDoctorButton_Click"/>
+                <Button x:Name="DeleteDoctorButton" Content="Delete" Width="75" Margin="5,5" Click="DeleteDoctorButton_Click"/>
+                <ComboBox Width="100" Margin="5,5" x:Name="SearchComboBox">
+                    <ComboBoxItem>Surname</ComboBoxItem>
+                    <ComboBoxItem>Name</ComboBoxItem>
+                    <ComboBoxItem>Patronymic</ComboBoxItem>
+                </ComboBox>
+                <TextBox Width="100" Margin="5,5" TextChanged="SearchTextBox_TextChanged" x:Name="SearchTextBox"/>
+            </StackPanel>
+            <DataGrid x:Name="DoctorsDataGrid" Grid.Row="2" Grid.Column="0"
+                      HorizontalAlignment="Stretch" ItemsSource="{Binding}"
+                      AutoGenerateColumns="False" IsReadOnly="true" CanUserResizeRows="False">
+                <DataGrid.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Add doctor" Click="AddDoctorButton_Click"/>
+                        <MenuItem Header="Edit doctor" Click="EditDoctorButton_Click"/>
+                        <MenuItem Header="Delete doctor" Click="DeleteDoctorButton_Click"/>
+                    </ContextMenu>
+                </DataGrid.ContextMenu>
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Surname" Binding="{Binding Path=surname}" Width="3*"/>
+                    <DataGridTextColumn Header="Name" Binding="{Binding Path=name}" Width="3*"/>
+                    <DataGridTextColumn Header="Patronymic" Binding="{Binding Path=patronymic}" Width="3*"/>
+                    <DataGridTextColumn Header="DOB" Binding="{Binding Path=dob, StringFormat=dd-MM-yyyy}" Width="3*"/>
+                    <DataGridTextColumn Header="Phone" Binding="{Binding Path=phone}" Width="3*"/>
+                    <DataGridTextColumn Header="Mail" Binding="{Binding Path=mail}" Width="5*"/>
+                    <DataGridTextColumn Header="Registation Date" Binding="{Binding Path=reg_date, StringFormat=dd-MM-yyyy}" Width="3*"/>
+                    <DataGridTextColumn Header="Position" Binding="{Binding Path=position}" Width="3*"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </StackPanel>
+        <StackPanel x:Name="Data2StackPanel" Grid.Row="1" Grid.RowSpan="2" Grid.Column="2" Grid.ColumnSpan="2">
+            <StackPanel Orientation="Horizontal">
+                <Button x:Name="AddTimeTableButton" Content="Add" Width="75" Margin="5,5" Click="AddTimeTableButton_Click" />
+                <Button x:Name="EditTimeTableButton" Content="Edit" Width="75" Margin="5,5" Click="EditTimeTableButton_Click"/>
+                <Button x:Name="DeleteTimeTableButton" Content="Delete" Width="75" Margin="5,5" Click="DeleteTimeTableButton_Click"/>
+            </StackPanel>
+            <DataGrid x:Name="TimeTableDataGrid" Grid.Row="2" Grid.Column="0"
+                      HorizontalAlignment="Stretch" ItemsSource="{Binding}"
+                      AutoGenerateColumns="False" IsReadOnly="true" CanUserResizeRows="False">
+                <DataGrid.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Add" Click="AddTimeTableButton_Click"/>
+                        <MenuItem Header="Edit" Click="EditTimeTableButton_Click"/>
+                        <MenuItem Header="Delete" Click="DeleteTimeTableButton_Click"/>
+                    </ContextMenu>
+                </DataGrid.ContextMenu>
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Day" Binding="{Binding Path=day}" Width="*"/>
+                    <DataGridTextColumn Header="Begin Time" Binding="{Binding Path=beg_time}" Width="*"/>
+                    <DataGridTextColumn Header="End Time" Binding="{Binding Path=end_time}" Width="*"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </StackPanel>
+        <GridSplitter x:Name="DialogGridSplitter" Grid.Column="3" Grid.Row="1" Grid.RowSpan="2" HorizontalAlignment="Center" Width="3" Background="LightGray" Visibility="Hidden"/>
+        <GridSplitter x:Name="Doctors_TimeTableGridSplitter" Grid.Column="1" Grid.Row="1" Grid.RowSpan="2" HorizontalAlignment="Center" Width="3" Background="LightGray" Visibility="Visible"/>
+        <Frame x:Name="DialogFrame" Grid.Row="1" Grid.RowSpan="2" Grid.Column="4" Visibility="Hidden"/>
+    </Grid>
+</Page>
